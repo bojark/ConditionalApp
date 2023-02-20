@@ -11,13 +11,13 @@ import ru.bojark.conditionalapp.profiles.SystemProfile;
 @Configuration
 public class JavaConfig {
 
-    @Bean(name = "profile")
+    @Bean
     @ConditionalOnProperty(prefix = "netology.profile", name = "dev", havingValue = "true")
     public SystemProfile devProfile() {
         return new DevProfile();
     }
 
-    @Bean(name = "profile")
+    @Bean
     @ConditionalOnProperty(prefix = "netology.profile", name = "dev", havingValue = "false")
 
 
