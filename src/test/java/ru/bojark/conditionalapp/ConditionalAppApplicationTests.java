@@ -1,7 +1,6 @@
 package ru.bojark.conditionalapp;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +23,7 @@ class ConditionalAppApplicationTests {
 
 
     @BeforeAll
-    static void setUp(){
+    static void setUp() {
         prodapp.start();
         devapp.start();
     }
@@ -33,17 +32,17 @@ class ConditionalAppApplicationTests {
     void contextLoadsDev() {
         String assertion = "Current profile is dev";
         ResponseEntity<String> forEntity = restTemplate.getForEntity("http://localhost:"
-                + devapp.getMappedPort(8080), String.class);
+                + devapp.getMappedPort(8080) + "/profile", String.class);
         System.out.println(forEntity.getBody());
         assertEquals(forEntity.getBody(), assertion);
 
     }
 
     @Test
-    void contextLoadsProd(){
-        String assertion = "Current profile is prod";
+    void contextLoadsProd() {
+        String assertion = "Current profile is production";
         ResponseEntity<String> forEntity = restTemplate.getForEntity("http://localhost:"
-                + prodapp.getMappedPort(8081), String.class);
+                + prodapp.getMappedPort(8081) + "/profile", String.class);
         System.out.println(forEntity.getBody());
         assertEquals(forEntity.getBody(), assertion);
     }
